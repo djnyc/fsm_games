@@ -115,8 +115,14 @@ class FiniteStateMachineCursor:
                     return True
 
                 else:
-                    raise Exception(f'No transition {transition}.')
+                    raise Exception(f'No transition in {transition} for for {self.state}.')
             else:
-                raise Exception(f'No transition in {self.machine.transitions} for action {next_action}. Trace so far is {self.trace}')
+                raise Exception(f'No transitions in {self.machine.transitions} for action {next_action}. Trace so far is {self.trace}')
         else:
             return False
+
+    def run_to_finish(self):
+        running = True
+
+        while running:
+            running = self.tick()
